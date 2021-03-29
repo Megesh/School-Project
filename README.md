@@ -23,19 +23,18 @@ https://www.liferay.com/documents/10182/246659966/Liferay+DXP+7.2+Compatibility+
 7) Assign Permissions to Role like below
 
 	School Admin :-
-	a)Add School Details
-	b)Update School Details
-	c)Delete School Details
-
-        Principal :-    
-	a)Update School Details
+	a)Add School Details   
+	b)Update School Details   
+	c)Delete School Details   
+ 	Principal :-
+	a)Update School Details   
 
 7) Create some sample user and assign users to site and assign site role to users which we created.
 
-	For ex. 
-	demouser1@gmail.com  test  School Admin
-	demouser2@gmail.com   test  Principal 
-	demouser3@gmail.com  test  (no need  assign any role)
+	For ex. (Email, password, role )
+	1) demouser1@gmail.com  test  School Admin
+	2) demouser2@gmail.com  test  Principal 
+	3) demouser3@gmail.com  test  (no need  assign any role)
 
 8) Login With the Super Admin and create page and drop SchoolManagement portlet on the page 
 9) Login With Created Users to check functionalities of School Management.
