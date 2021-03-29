@@ -1,0 +1,10 @@
+Bundle-Name: School-api
+Bundle-SymbolicName: com.hp.school.management.api
+Bundle-Version: 1.0.0
+Export-Package:\
+	com.hp.school.management.exception,\
+	com.hp.school.management.model,\
+	com.hp.school.management.service,\
+	com.hp.school.management.service.persistence
+-check: EXPORTS
+-includeresource: META-INF/service.xml=../School-service/service.xml

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 7.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_7_2_0.dtd">
+
+<service-builder dependency-injector="ds" package-path="com.hp.school.management">
+	<namespace>sch</namespace>
+	<!--<entity data-source="sampleDataSource" local-service="true" name="Foo" remote-service="false" session-factory="sampleSessionFactory" table="foo" tx-manager="sampleTransactionManager uuid="true"">-->
+	<entity local-service="true" name="School" remote-service="false" uuid="true">
+
+		<!-- PK fields -->
+
+		<column name="schoolId" primary="true" type="long" />
+
+		<!-- Group mappings-->
+
+		<column name="groupId" type="long" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />
+		<column name="type" type="String" />
+		<column name="city" type="String" />
+		<column name="noOfstudent" type="int" />
+		
+			<!-- Audit fields -->
+
+		<column name="createdBy" type="long" />
+		<column name="updatedBy" type="long" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<column name="isActive" type="boolean" />
+		<column name="status" type="int" />
+	
+		<finder name="Status" return-type="Collection">
+			<finder-column name="status" />
+		</finder>
+	
+		<finder name="G_S" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="status" />
+		</finder>
+
+
+		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
+		<reference package-path="com.liferay.portlet.asset" entity="AssetLink" />
+
+	</entity>
+</service-builder>

@@ -1,0 +1,4 @@
+Bundle-Name: SchoolManagement
+Bundle-SymbolicName: com.hp.school.management
+Bundle-Version: 1.0.0
+Export-Package: com.hp.school.management.constants

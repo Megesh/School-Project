@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.hp.school.management.model.School">
+		<field name="uuid" type="String" />
+		<field name="schoolId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="name" type="String" />
+		<field name="type" type="String" />
+		<field name="city" type="String" />
+		<field name="noOfstudent" type="int" />
+		<field name="createdBy" type="long" />
+		<field name="updatedBy" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="isActive" type="boolean" />
+		<field name="status" type="int" />
+	</model>
+</model-hints>
