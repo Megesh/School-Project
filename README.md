@@ -21,12 +21,15 @@ https://www.liferay.com/documents/10182/246659966/Liferay+DXP+7.2+Compatibility+
         a) School Admin
         b) Principal
 7) Assign Permissions to Role like below
+
 	School Admin :-
-        a)Add School Details'
-        b)Update School Details
-        c)Delete School Details
+	a)Add School Details
+	b)Update School Details
+	c)Delete School Details
+
         Principal :-    
 	a)Update School Details
+
 7) Create some sample user and assign users to site and assign site role to users which we created.
 
 	For ex. 
