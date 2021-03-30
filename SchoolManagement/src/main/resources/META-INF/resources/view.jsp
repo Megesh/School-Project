@@ -33,6 +33,14 @@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <liferay-theme:defineObjects />
 
 <portlet:defineObjects />
+<liferay-ui:success key="<%=SchoolManagementPortletKeys.SCHOOL_ADDED_SESSION_MSG_SUCESS %>" message="School added successfully "
+/>
+<liferay-ui:success key="<%=SchoolManagementPortletKeys.SCHOOL_DELETED_SESSION_MSG_SUCESS %>" message="School deleted successfully!"
+/>
+<liferay-ui:success key="<%=SchoolManagementPortletKeys.SCHOOL_EDITED_SESSION_MSG_SUCESS %>" message="School updated successfully!"
+/>
+<liferay-ui:error key="<%=SchoolManagementPortletKeys.SESSION_MSG_ERROR %>" message="Opps! Some thing went wrong , Please try after some time"
+/>
 
 		<%
 		String searchKeyword= ParamUtil.getString(renderRequest, "searchKeyword",StringPool.BLANK);
