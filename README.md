@@ -36,5 +36,8 @@ https://www.liferay.com/documents/10182/246659966/Liferay+DXP+7.2+Compatibility+
 	2) demouser2@gmail.com  test  Principal 
 	3) demouser3@gmail.com  test  (no need  assign any role)
 
-8) Login With the Super Admin and create page and drop SchoolManagement portlet on the page 
-9) Login With Created Users to check functionalities of School Management.
+8) Create a workspace by using liferay blade cli OR Eclipse IDE.
+	Note :Eclipse required to install Lifetay eclipse plugin. Fine URL Here : https://liferay.dev/-/ide-installation-instructions	
+9) Deploy the School (Service Builder) and SchoolManagement MVC portlet Module 
+10) Login With the Super Admin and create page and drop SchoolManagement portlet on the page 
+11) Login With Created Users to check functionalities of School Management.
