@@ -16,8 +16,10 @@ package com.hp.school.management.service;
 
 import com.hp.school.management.model.School;
 
+import com.liferay.exportimport.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.dao.orm.ActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -206,6 +208,10 @@ public interface SchoolLocalService
 	public ActionableDynamicQuery getActionableDynamicQuery();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public ExportActionableDynamicQuery getExportActionableDynamicQuery(
+		PortletDataContext portletDataContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public IndexableActionableDynamicQuery getIndexableActionableDynamicQuery();
 
 	/**
@@ -258,6 +264,32 @@ public interface SchoolLocalService
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public List<School> getSchools(int start, int end);
+
+	/**
+	 * Returns all the schools matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the schools
+	 * @param companyId the primary key of the company
+	 * @return the matching schools, or an empty list if no matches were found
+	 */
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<School> getSchoolsByUuidAndCompanyId(
+		String uuid, long companyId);
+
+	/**
+	 * Returns a range of schools matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the schools
+	 * @param companyId the primary key of the company
+	 * @param start the lower bound of the range of schools
+	 * @param end the upper bound of the range of schools (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the range of matching schools, or an empty list if no matches were found
+	 */
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public List<School> getSchoolsByUuidAndCompanyId(
+		String uuid, long companyId, int start, int end,
+		OrderByComparator<School> orderByComparator);
 
 	/**
 	 * Returns the number of schools.

@@ -16,6 +16,8 @@ package com.hp.school.management.model;
 
 import com.liferay.portal.kernel.bean.AutoEscape;
 import com.liferay.portal.kernel.model.BaseModel;
+import com.liferay.portal.kernel.model.ShardedModel;
+import com.liferay.portal.kernel.model.StagedModel;
 
 import java.util.Date;
 
@@ -33,7 +35,8 @@ import org.osgi.annotation.versioning.ProviderType;
  * @generated
  */
 @ProviderType
-public interface SchoolModel extends BaseModel<School> {
+public interface SchoolModel
+	extends BaseModel<School>, ShardedModel, StagedModel {
 
 	/*
 	 * NOTE FOR DEVELOPERS:
@@ -61,6 +64,7 @@ public interface SchoolModel extends BaseModel<School> {
 	 * @return the uuid of this school
 	 */
 	@AutoEscape
+	@Override
 	public String getUuid();
 
 	/**
@@ -68,6 +72,7 @@ public interface SchoolModel extends BaseModel<School> {
 	 *
 	 * @param uuid the uuid of this school
 	 */
+	@Override
 	public void setUuid(String uuid);
 
 	/**
@@ -97,6 +102,22 @@ public interface SchoolModel extends BaseModel<School> {
 	 * @param groupId the group ID of this school
 	 */
 	public void setGroupId(long groupId);
+
+	/**
+	 * Returns the company ID of this school.
+	 *
+	 * @return the company ID of this school
+	 */
+	@Override
+	public long getCompanyId();
+
+	/**
+	 * Sets the company ID of this school.
+	 *
+	 * @param companyId the company ID of this school
+	 */
+	@Override
+	public void setCompanyId(long companyId);
 
 	/**
 	 * Returns the name of this school.
@@ -190,6 +211,7 @@ public interface SchoolModel extends BaseModel<School> {
 	 *
 	 * @return the create date of this school
 	 */
+	@Override
 	public Date getCreateDate();
 
 	/**
@@ -197,6 +219,7 @@ public interface SchoolModel extends BaseModel<School> {
 	 *
 	 * @param createDate the create date of this school
 	 */
+	@Override
 	public void setCreateDate(Date createDate);
 
 	/**
@@ -204,6 +227,7 @@ public interface SchoolModel extends BaseModel<School> {
 	 *
 	 * @return the modified date of this school
 	 */
+	@Override
 	public Date getModifiedDate();
 
 	/**
@@ -211,6 +235,7 @@ public interface SchoolModel extends BaseModel<School> {
 	 *
 	 * @param modifiedDate the modified date of this school
 	 */
+	@Override
 	public void setModifiedDate(Date modifiedDate);
 
 	/**

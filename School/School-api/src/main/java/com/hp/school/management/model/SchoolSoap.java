@@ -34,6 +34,7 @@ public class SchoolSoap implements Serializable {
 		soapModel.setUuid(model.getUuid());
 		soapModel.setSchoolId(model.getSchoolId());
 		soapModel.setGroupId(model.getGroupId());
+		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setName(model.getName());
 		soapModel.setType(model.getType());
 		soapModel.setCity(model.getCity());
@@ -118,6 +119,14 @@ public class SchoolSoap implements Serializable {
 
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
+	}
+
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
 	}
 
 	public String getName() {
@@ -207,6 +216,7 @@ public class SchoolSoap implements Serializable {
 	private String _uuid;
 	private long _schoolId;
 	private long _groupId;
+	private long _companyId;
 	private String _name;
 	private String _type;
 	private String _city;

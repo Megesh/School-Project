@@ -14,6 +14,7 @@
 
 package com.hp.school.management.model;
 
+import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.model.wrapper.BaseModelWrapper;
 
@@ -44,6 +45,7 @@ public class SchoolWrapper
 		attributes.put("uuid", getUuid());
 		attributes.put("schoolId", getSchoolId());
 		attributes.put("groupId", getGroupId());
+		attributes.put("companyId", getCompanyId());
 		attributes.put("name", getName());
 		attributes.put("type", getType());
 		attributes.put("city", getCity());
@@ -76,6 +78,12 @@ public class SchoolWrapper
 
 		if (groupId != null) {
 			setGroupId(groupId);
+		}
+
+		Long companyId = (Long)attributes.get("companyId");
+
+		if (companyId != null) {
+			setCompanyId(companyId);
 		}
 
 		String name = (String)attributes.get("name");
@@ -147,6 +155,16 @@ public class SchoolWrapper
 	@Override
 	public String getCity() {
 		return model.getCity();
+	}
+
+	/**
+	 * Returns the company ID of this school.
+	 *
+	 * @return the company ID of this school
+	 */
+	@Override
+	public long getCompanyId() {
+		return model.getCompanyId();
 	}
 
 	/**
@@ -305,6 +323,16 @@ public class SchoolWrapper
 	}
 
 	/**
+	 * Sets the company ID of this school.
+	 *
+	 * @param companyId the company ID of this school
+	 */
+	@Override
+	public void setCompanyId(long companyId) {
+		model.setCompanyId(companyId);
+	}
+
+	/**
 	 * Sets the create date of this school.
 	 *
 	 * @param createDate the create date of this school
@@ -432,6 +460,11 @@ public class SchoolWrapper
 	@Override
 	public void setUuid(String uuid) {
 		model.setUuid(uuid);
+	}
+
+	@Override
+	public StagedModelType getStagedModelType() {
+		return model.getStagedModelType();
 	}
 
 	@Override

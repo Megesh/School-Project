@@ -9,6 +9,10 @@ dependencies {
 	compileOnly group: "org.osgi", name: "org.osgi.annotation.versioning"
 	compileOnly group: "org.osgi", name: "org.osgi.core"
 	compileOnly group: "org.osgi", name: "org.osgi.service.component.annotations"
+	compileOnly group: "com.liferay.portal", name: "com.liferay.portal.kernel", version: "4.4.0"
+	compileOnly group: "javax.portlet", name: "portlet-api"
+	compileOnly group: 'com.liferay', name: 'com.liferay.portal.search.spi', version: '2.1.1'
+	
 }
 
 buildService {

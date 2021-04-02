@@ -13,6 +13,11 @@
 		<!-- Group mappings-->
 
 		<column name="groupId" type="long" />
+		
+		<!-- Company mappings-->
+
+		<column name="companyId" type="long" />
+		
 
 		<!-- Other fields -->
 

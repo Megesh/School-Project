@@ -5,6 +5,7 @@
 		<field name="uuid" type="String" />
 		<field name="schoolId" type="long" />
 		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
 		<field name="name" type="String" />
 		<field name="type" type="String" />
 		<field name="city" type="String" />

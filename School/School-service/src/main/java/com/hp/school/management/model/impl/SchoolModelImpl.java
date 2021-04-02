@@ -19,6 +19,7 @@ import com.hp.school.management.model.SchoolModel;
 
 import com.liferay.expando.kernel.model.ExpandoBridge;
 import com.liferay.expando.kernel.util.ExpandoBridgeFactoryUtil;
+import com.liferay.exportimport.kernel.lar.StagedModelType;
 import com.liferay.petra.string.StringBundler;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.model.CacheModel;
@@ -26,6 +27,7 @@ import com.liferay.portal.kernel.model.ModelWrapper;
 import com.liferay.portal.kernel.model.impl.BaseModelImpl;
 import com.liferay.portal.kernel.service.ServiceContext;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 
 import java.io.Serializable;
@@ -66,12 +68,12 @@ public class SchoolModelImpl
 
 	public static final Object[][] TABLE_COLUMNS = {
 		{"uuid_", Types.VARCHAR}, {"schoolId", Types.BIGINT},
-		{"groupId", Types.BIGINT}, {"name", Types.VARCHAR},
-		{"type_", Types.VARCHAR}, {"city", Types.VARCHAR},
-		{"noOfstudent", Types.INTEGER}, {"createdBy", Types.BIGINT},
-		{"updatedBy", Types.BIGINT}, {"createDate", Types.TIMESTAMP},
-		{"modifiedDate", Types.TIMESTAMP}, {"isActive", Types.BOOLEAN},
-		{"status", Types.INTEGER}
+		{"groupId", Types.BIGINT}, {"companyId", Types.BIGINT},
+		{"name", Types.VARCHAR}, {"type_", Types.VARCHAR},
+		{"city", Types.VARCHAR}, {"noOfstudent", Types.INTEGER},
+		{"createdBy", Types.BIGINT}, {"updatedBy", Types.BIGINT},
+		{"createDate", Types.TIMESTAMP}, {"modifiedDate", Types.TIMESTAMP},
+		{"isActive", Types.BOOLEAN}, {"status", Types.INTEGER}
 	};
 
 	public static final Map<String, Integer> TABLE_COLUMNS_MAP =
@@ -81,6 +83,7 @@ public class SchoolModelImpl
 		TABLE_COLUMNS_MAP.put("uuid_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("schoolId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("groupId", Types.BIGINT);
+		TABLE_COLUMNS_MAP.put("companyId", Types.BIGINT);
 		TABLE_COLUMNS_MAP.put("name", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("type_", Types.VARCHAR);
 		TABLE_COLUMNS_MAP.put("city", Types.VARCHAR);
@@ -94,7 +97,7 @@ public class SchoolModelImpl
 	}
 
 	public static final String TABLE_SQL_CREATE =
-		"create table sch_School (uuid_ VARCHAR(75) null,schoolId LONG not null primary key,groupId LONG,name VARCHAR(75) null,type_ VARCHAR(75) null,city VARCHAR(75) null,noOfstudent INTEGER,createdBy LONG,updatedBy LONG,createDate DATE null,modifiedDate DATE null,isActive BOOLEAN,status INTEGER)";
+		"create table sch_School (uuid_ VARCHAR(75) null,schoolId LONG not null primary key,groupId LONG,companyId LONG,name VARCHAR(75) null,type_ VARCHAR(75) null,city VARCHAR(75) null,noOfstudent INTEGER,createdBy LONG,updatedBy LONG,createDate DATE null,modifiedDate DATE null,isActive BOOLEAN,status INTEGER)";
 
 	public static final String TABLE_SQL_DROP = "drop table sch_School";
 
@@ -109,13 +112,15 @@ public class SchoolModelImpl
 
 	public static final String TX_MANAGER = "liferayTransactionManager";
 
-	public static final long GROUPID_COLUMN_BITMASK = 1L;
+	public static final long COMPANYID_COLUMN_BITMASK = 1L;
 
-	public static final long STATUS_COLUMN_BITMASK = 2L;
+	public static final long GROUPID_COLUMN_BITMASK = 2L;
 
-	public static final long UUID_COLUMN_BITMASK = 4L;
+	public static final long STATUS_COLUMN_BITMASK = 4L;
 
-	public static final long SCHOOLID_COLUMN_BITMASK = 8L;
+	public static final long UUID_COLUMN_BITMASK = 8L;
+
+	public static final long SCHOOLID_COLUMN_BITMASK = 16L;
 
 	public static void setEntityCacheEnabled(boolean entityCacheEnabled) {
 		_entityCacheEnabled = entityCacheEnabled;
@@ -256,6 +261,9 @@ public class SchoolModelImpl
 		attributeGetterFunctions.put("groupId", School::getGroupId);
 		attributeSetterBiConsumers.put(
 			"groupId", (BiConsumer<School, Long>)School::setGroupId);
+		attributeGetterFunctions.put("companyId", School::getCompanyId);
+		attributeSetterBiConsumers.put(
+			"companyId", (BiConsumer<School, Long>)School::setCompanyId);
 		attributeGetterFunctions.put("name", School::getName);
 		attributeSetterBiConsumers.put(
 			"name", (BiConsumer<School, String>)School::setName);
@@ -348,6 +356,28 @@ public class SchoolModelImpl
 
 	public long getOriginalGroupId() {
 		return _originalGroupId;
+	}
+
+	@Override
+	public long getCompanyId() {
+		return _companyId;
+	}
+
+	@Override
+	public void setCompanyId(long companyId) {
+		_columnBitmask |= COMPANYID_COLUMN_BITMASK;
+
+		if (!_setOriginalCompanyId) {
+			_setOriginalCompanyId = true;
+
+			_originalCompanyId = _companyId;
+		}
+
+		_companyId = companyId;
+	}
+
+	public long getOriginalCompanyId() {
+		return _originalCompanyId;
 	}
 
 	@Override
@@ -488,6 +518,12 @@ public class SchoolModelImpl
 		return _originalStatus;
 	}
 
+	@Override
+	public StagedModelType getStagedModelType() {
+		return new StagedModelType(
+			PortalUtil.getClassNameId(School.class.getName()));
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -495,7 +531,7 @@ public class SchoolModelImpl
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(
-			0, School.class.getName(), getPrimaryKey());
+			getCompanyId(), School.class.getName(), getPrimaryKey());
 	}
 
 	@Override
@@ -527,6 +563,7 @@ public class SchoolModelImpl
 		schoolImpl.setUuid(getUuid());
 		schoolImpl.setSchoolId(getSchoolId());
 		schoolImpl.setGroupId(getGroupId());
+		schoolImpl.setCompanyId(getCompanyId());
 		schoolImpl.setName(getName());
 		schoolImpl.setType(getType());
 		schoolImpl.setCity(getCity());
@@ -603,6 +640,10 @@ public class SchoolModelImpl
 
 		_setOriginalGroupId = false;
 
+		_originalCompanyId = _companyId;
+
+		_setOriginalCompanyId = false;
+
 		_setModifiedDate = false;
 
 		_originalStatus = _status;
@@ -627,6 +668,8 @@ public class SchoolModelImpl
 		schoolCacheModel.schoolId = getSchoolId();
 
 		schoolCacheModel.groupId = getGroupId();
+
+		schoolCacheModel.companyId = getCompanyId();
 
 		schoolCacheModel.name = getName();
 
@@ -760,6 +803,9 @@ public class SchoolModelImpl
 	private long _groupId;
 	private long _originalGroupId;
 	private boolean _setOriginalGroupId;
+	private long _companyId;
+	private long _originalCompanyId;
+	private boolean _setOriginalCompanyId;
 	private String _name;
 	private String _type;
 	private String _city;

@@ -230,6 +230,14 @@ public class SchoolLocalServiceUtil {
 		return getService().getActionableDynamicQuery();
 	}
 
+	public static com.liferay.portal.kernel.dao.orm.ExportActionableDynamicQuery
+		getExportActionableDynamicQuery(
+			com.liferay.exportimport.kernel.lar.PortletDataContext
+				portletDataContext) {
+
+		return getService().getExportActionableDynamicQuery(portletDataContext);
+	}
+
 	public static
 		com.liferay.portal.kernel.dao.orm.IndexableActionableDynamicQuery
 			getIndexableActionableDynamicQuery() {
@@ -299,6 +307,39 @@ public class SchoolLocalServiceUtil {
 		getSchools(int start, int end) {
 
 		return getService().getSchools(start, end);
+	}
+
+	/**
+	 * Returns all the schools matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the schools
+	 * @param companyId the primary key of the company
+	 * @return the matching schools, or an empty list if no matches were found
+	 */
+	public static java.util.List<com.hp.school.management.model.School>
+		getSchoolsByUuidAndCompanyId(String uuid, long companyId) {
+
+		return getService().getSchoolsByUuidAndCompanyId(uuid, companyId);
+	}
+
+	/**
+	 * Returns a range of schools matching the UUID and company.
+	 *
+	 * @param uuid the UUID of the schools
+	 * @param companyId the primary key of the company
+	 * @param start the lower bound of the range of schools
+	 * @param end the upper bound of the range of schools (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the range of matching schools, or an empty list if no matches were found
+	 */
+	public static java.util.List<com.hp.school.management.model.School>
+		getSchoolsByUuidAndCompanyId(
+			String uuid, long companyId, int start, int end,
+			com.liferay.portal.kernel.util.OrderByComparator
+				<com.hp.school.management.model.School> orderByComparator) {
+
+		return getService().getSchoolsByUuidAndCompanyId(
+			uuid, companyId, start, end, orderByComparator);
 	}
 
 	/**

@@ -61,7 +61,7 @@ public class SchoolCacheModel implements CacheModel<School>, Externalizable {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(29);
 
 		sb.append("{uuid=");
 		sb.append(uuid);
@@ -69,6 +69,8 @@ public class SchoolCacheModel implements CacheModel<School>, Externalizable {
 		sb.append(schoolId);
 		sb.append(", groupId=");
 		sb.append(groupId);
+		sb.append(", companyId=");
+		sb.append(companyId);
 		sb.append(", name=");
 		sb.append(name);
 		sb.append(", type=");
@@ -107,6 +109,7 @@ public class SchoolCacheModel implements CacheModel<School>, Externalizable {
 
 		schoolImpl.setSchoolId(schoolId);
 		schoolImpl.setGroupId(groupId);
+		schoolImpl.setCompanyId(companyId);
 
 		if (name == null) {
 			schoolImpl.setName("");
@@ -162,6 +165,8 @@ public class SchoolCacheModel implements CacheModel<School>, Externalizable {
 		schoolId = objectInput.readLong();
 
 		groupId = objectInput.readLong();
+
+		companyId = objectInput.readLong();
 		name = objectInput.readUTF();
 		type = objectInput.readUTF();
 		city = objectInput.readUTF();
@@ -191,6 +196,8 @@ public class SchoolCacheModel implements CacheModel<School>, Externalizable {
 		objectOutput.writeLong(schoolId);
 
 		objectOutput.writeLong(groupId);
+
+		objectOutput.writeLong(companyId);
 
 		if (name == null) {
 			objectOutput.writeUTF("");
@@ -229,6 +236,7 @@ public class SchoolCacheModel implements CacheModel<School>, Externalizable {
 	public String uuid;
 	public long schoolId;
 	public long groupId;
+	public long companyId;
 	public String name;
 	public String type;
 	public String city;

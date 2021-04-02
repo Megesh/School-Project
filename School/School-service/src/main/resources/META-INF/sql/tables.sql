@@ -2,6 +2,7 @@ create table sch_School (
 	uuid_ VARCHAR(75) null,
 	schoolId LONG not null primary key,
 	groupId LONG,
+	companyId LONG,
 	name VARCHAR(75) null,
 	type_ VARCHAR(75) null,
 	city VARCHAR(75) null,
